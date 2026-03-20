@@ -1,0 +1,79 @@
+/* ========== CALCULATOR APP ========== */
+.cal-window {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 360px;
+  width: 400px;
+}
+
+.window-content.cal {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.window-content.cal .winput {
+  height: 35px;
+  width: 100%;
+  text-align: right;
+}
+
+.window-content.cal button {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.memory-box {
+  box-shadow: var(--inner-bevel2);
+}
+
+.memory-box,
+.bottom-row button {
+  height: 35px;
+  width: 50px;
+}
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.window-content.cal .actions {
+  display: flex;
+  gap: 5px;
+}
+
+.actions button {
+  color: brown;
+  width: 60px;
+}
+
+.bottom-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.opr {
+  color: rgb(190, 17, 17);
+}
+
+.num {
+  color: rgb(74, 10, 138);
+}
+
+.memory-btns {
+  display: flex;
+  flex-direction: column;
+}
+
+.memory-btns,
+.numpad {
+  column-gap: 5px;
+  row-gap: 8px;
+}
+
+.numpad {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}

@@ -1,0 +1,150 @@
+@import url("fonts/stylesheet.css");
+
+:root {
+  --win95-font:
+    "W95FA", "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+
+  --window-light: rgb(192, 192, 192);
+  
+  --title-bar-active: rgb(1, 0, 127);
+  --title-bar-inactive: rgb(128, 128, 128);
+
+  --inner-bevel1: inset 1px 1px 0 black, inset -1px -1px 0 rgb(231, 231, 231);
+  --inner-bevel2: inset 2px 2px 0 black, inset -2px -2px 0 rgb(231, 231, 231);
+  --outer-bevel1: inset 1px 1px 0 white, inset -1px -1px 0 #8e8e8e;
+  --outer-bevel2: inset 2px 2px 0 white, inset -2px -2px 0 #8e8e8e;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  position: relative;
+  font-family: var(--win95-font);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: rgb(0, 128, 129);
+}
+
+input:focus {
+  outline: none;
+}
+
+/* ========== WINDOW BASE STYLES ========== */
+/* -- main window */
+.window {
+  position: absolute;
+  font-size: 14px;
+  background: var(--window-light);
+  box-shadow:
+    inset 2px 2px 0 white,
+    inset -2px -2px 0 #8e8e8e;
+  border: 2px solid var(--window-light);
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  padding: 4px;
+}
+
+.window-content {
+  height: 100%;
+  width: 100%;
+  padding: 20px 15px;
+}
+
+/* -- title bar */
+.title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 30px;
+  background: var(--title-bar-inactive);
+  overflow: hidden;
+  user-select: none;
+}
+
+.title-bar.active {
+  background-color: var(--title-bar-active);
+}
+
+.title-bar div {
+  display: flex;
+  align-items: center;
+}
+
+.title-bar p {
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+}
+
+.title-bar img {
+  height: 35px;
+  width: 25px;
+  margin: 2px;
+  object-fit: cover;
+}
+
+/* -- minimize, maximize, close buttons */
+.window-buttons {
+  margin-right: 3px;
+  gap: 1px;
+}
+
+.window-buttons button {
+  height: 22px;
+  width: 25px;
+}
+
+.window-buttons button img {
+  image-rendering: pixelated;
+  height: 15px;
+  width: 15px;
+}
+
+/* --- ribbon menu */
+.ribbon {
+  display: flex;
+  gap: 15px;
+  padding: 6px 5px;
+  user-select: none;
+}
+
+.ribbon span {
+  text-decoration: underline;
+}
+
+.divider {
+  height: 2px;
+  background-color: rgb(140, 140, 140);
+  box-shadow: 0 2px 0 rgb(231, 231, 231);
+}
+
+.taskbar {
+  display: flex;
+  padding: 3px;
+  position: absolute;
+  right: 0; 
+  bottom: 0; 
+  left: 0;
+  height: 40px;
+  background-color: var(--window-light);
+  border-top: 2px solid rgb(241, 241, 241);
+}
+
+.start-btn {
+  font-size: 1em;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 0 10px;
+}
+
+.clock {
+  box-shadow: var(--inner-bevel2);
+}
