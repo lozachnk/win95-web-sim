@@ -18,13 +18,13 @@
 
         <div class="window-buttons">
           <button class="primary">
-            <img src="styles/icons/minimize.png" alt="" />
+            <img src="styles/icons/system/win-frame/minimize.png" alt="" />
           </button>
           <button class="primary">
-            <img src="styles/icons/maximize.png" alt="" />
+            <img src="styles/icons/system/win-frame/maximize.png" alt="" />
           </button>
           <button class="primary">
-            <img src="styles/icons/close.png" alt="" />
+            <img src="styles/icons/system/win-frame/close.png" alt="" />
           </button>
         </div>
       </div>
@@ -33,7 +33,6 @@
         <div><span>V</span>iew</div>
         <div><span>H</span>elp</div>
       </div>
-      <div class="divider"></div>
 
       <div class="window-content cal">
         <input type="text" name="" id="" class="winput" />
@@ -80,8 +79,17 @@
     </div>
 
     <div class="taskbar">
-      <button class="primary start-btn">Start</button>
-      <div class="clock">12:00</div>
+      <div class="start-side">
+        <button class="primary start-btn">
+          <img src="styles/icons/system/taskbar/start-logo.png" alt="">
+          Start
+        </button>
+        <div class="pinned-apps">
+        </div>
+        <div class="running-apps"></div>
+      </div>
+        
+      <div class="sys-side">12:00</div>
     </div>
     <script type="module" src="app/main.js"></script>
   </body>

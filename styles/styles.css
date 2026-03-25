@@ -3,8 +3,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 360px;
-  width: 400px;
+  height: 300px;
+  width: 320px;
 }
 
 .window-content.cal {
@@ -14,13 +14,13 @@
 }
 
 .window-content.cal .winput {
-  height: 35px;
+  height: 30px;
   width: 100%;
   text-align: right;
 }
 
 .window-content.cal button {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
 }
 
@@ -30,8 +30,8 @@
 
 .memory-box,
 .bottom-row button {
-  height: 35px;
-  width: 50px;
+  height: 25px;
+  width: 40px;
 }
 
 .top-row {

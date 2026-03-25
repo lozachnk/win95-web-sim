@@ -19,8 +19,8 @@ button.primary {
 
   background: var(--window-light);
   box-shadow: var(--outer-bevel2);
-  border-right: 2px solid black;
-  border-bottom: 2px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
 button.primary:hover {

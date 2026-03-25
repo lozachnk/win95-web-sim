@@ -7,13 +7,21 @@
 
   --window-light: rgb(192, 192, 192);
   
-  --title-bar-active: rgb(1, 0, 127);
-  --title-bar-inactive: rgb(128, 128, 128);
+  --title-bar-active: linear-gradient(
+    to right,
+    rgb(1, 0, 127),
+    rgb(0, 0, 182)
+  );
+  --title-bar-inactive: linear-gradient(
+    to right,
+    rgb(128, 128, 128),
+    rgb(163, 163, 163)
+  );
 
   --inner-bevel1: inset 1px 1px 0 black, inset -1px -1px 0 rgb(231, 231, 231);
-  --inner-bevel2: inset 2px 2px 0 black, inset -2px -2px 0 rgb(231, 231, 231);
+  --inner-bevel2: inset 1px 1px 0 black, inset -1px -1px 0 rgb(231, 231, 231);
   --outer-bevel1: inset 1px 1px 0 white, inset -1px -1px 0 #8e8e8e;
-  --outer-bevel2: inset 2px 2px 0 white, inset -2px -2px 0 #8e8e8e;
+  --outer-bevel2: inset 1px 1px 0 white, inset -1px -1px 0 #8e8e8e;
 }
 
 * {
@@ -43,11 +51,11 @@ input:focus {
   font-size: 14px;
   background: var(--window-light);
   box-shadow:
-    inset 2px 2px 0 white,
-    inset -2px -2px 0 #8e8e8e;
-  border: 2px solid var(--window-light);
-  border-right: 2px solid black;
-  border-bottom: 2px solid black;
+    inset 1px 1px 0 white,
+    inset -1px -1px 0 #8e8e8e;
+  border: 1px solid var(--window-light);
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
   padding: 4px;
 }
 
@@ -62,14 +70,14 @@ input:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 30px;
+  height: 25px;
   background: var(--title-bar-inactive);
   overflow: hidden;
   user-select: none;
 }
 
 .title-bar.active {
-  background-color: var(--title-bar-active);
+  background: var(--title-bar-active);
 }
 
 .title-bar div {
@@ -78,7 +86,7 @@ input:focus {
 }
 
 .title-bar p {
-  font-size: 15px;
+  font-size: 14px;
   letter-spacing: 1px;
   font-weight: bold;
   color: rgb(255, 255, 255);
@@ -98,8 +106,8 @@ input:focus {
 }
 
 .window-buttons button {
-  height: 22px;
-  width: 25px;
+  height: 18px;
+  width: 20px;
 }
 
 .window-buttons button img {
@@ -110,6 +118,7 @@ input:focus {
 
 /* --- ribbon menu */
 .ribbon {
+  position: relative;
   display: flex;
   gap: 15px;
   padding: 6px 5px;
@@ -120,31 +129,71 @@ input:focus {
   text-decoration: underline;
 }
 
-.divider {
-  height: 2px;
-  background-color: rgb(140, 140, 140);
-  box-shadow: 0 2px 0 rgb(231, 231, 231);
+.ribbon::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background: rgb(140, 140, 140);
+  box-shadow: 0 1px 0 rgb(231, 231, 231);
 }
 
+.divider {
+  height: 1px;
+  background-color: rgb(140, 140, 140);
+  visibility: hidden;
+}
+
+/* ========== DESKTOP ========== */
+/* --- taskbar */
 .taskbar {
   display: flex;
+  justify-content: space-between;
   padding: 3px;
   position: absolute;
   right: 0; 
   bottom: 0; 
   left: 0;
-  height: 40px;
+  height: 35px;
   background-color: var(--window-light);
-  border-top: 2px solid rgb(241, 241, 241);
+  border-top: 1px solid rgb(241, 241, 241);
+}
+
+.taskbar > div {
+  display: flex;
 }
 
 .start-btn {
   font-size: 1em;
   font-weight: bold;
   letter-spacing: 1px;
-  padding: 0 10px;
+  padding: 0 8px;
 }
 
-.clock {
+.start-btn img {
+  height: 15px;
+  margin-right: 3px;
+}
+
+.sys-side {
+  padding: 8px;
+  align-items: center;
   box-shadow: var(--inner-bevel2);
+}
+
+.start-side > * {
+  position: relative;
+  display: flex;
+}
+
+.start-side > :not(:last-child):has(> *)::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  height: 100%;
+  width: 1px;
+  background: #8e8e8e;
+  box-shadow: 1px 0 0 rgb(241, 241, 241);
 }

@@ -11,7 +11,7 @@ function attachWindowEVT() {
     if (!titleBar) return;
 
     const win = titleBar.closest('.window');
-    if (!window) return;
+    if (!win) return;
 
     const rect = win.getBoundingClientRect();
     win.style.left = `${rect.left}px`;
