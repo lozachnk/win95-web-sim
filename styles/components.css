@@ -1,4 +1,137 @@
-/* ========== COMPONENTS ========== */
+/* ========== SYSTEM COMPONENTS ========== */
+/* --- start menu */
+.start-menu {
+  position: absolute;
+  bottom: calc(var(--taskbar-height) - 4px);
+  width: 250px;
+  background: var(--window-light);
+  box-shadow: var(--outer-bevel2);
+  border-width: 0 2px 2px 0;
+  border-style: solid;
+  border-color: black;
+  visibility: hidden;
+}
+
+.start-menu.opened {
+  visibility: visible;
+  z-index: 1;
+}
+
+.start-menu {
+  display: grid;
+  grid-template-columns: 25px 1fr;
+  padding: 3px;
+}
+
+.title-strip {
+  color: white;
+  writing-mode: sideways-lr;
+  background: linear-gradient(
+    to bottom,
+    rgb(1, 0, 127),
+    rgb(1, 0, 127),
+    rgb(32, 32, 255)
+  );
+}
+
+.start-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.title-strip span {
+  font-weight: bold;
+}
+
+.start-entry {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 15px;
+  height: 40px;
+  padding: 4px;
+}
+
+.start-entry[data-type="folder"]::after {
+  content: '';
+}
+
+.start-entry:hover {
+  background: var(--accent-blue);
+  color: white;
+}
+
+.list-icon {
+  height: 50px;
+  width: 40px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+/* --- taskbar */
+.taskbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: var(--taskbar-height);
+  background-color: var(--window-light);
+  border-top: 1px solid rgb(241, 241, 241);
+}
+
+.taskbar > div {
+  display: flex;
+}
+
+.start-btn {
+  font-size: 1em;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 0 8px;
+}
+
+.start-btn.active {
+  box-shadow: var(--inner-bevel2);
+  background: rgb(165, 170, 171);
+  border: none;
+}
+
+.start-btn.active:hover {
+  background: rgb(165, 170, 171);
+}
+
+.start-btn img {
+  height: 15px;
+  margin-right: 3px;
+}
+
+.sys-side {
+  padding: 8px;
+  align-items: center;
+  box-shadow: var(--inner-bevel2);
+}
+
+.start-side > * {
+  position: relative;
+  display: flex;
+}
+
+.start-side > :not(:last-child):has(> *)::after {
+  content: "";
+  position: absolute;
+  right: -8px;
+  height: 100%;
+  width: 2px;
+  background: #8e8e8e;
+  box-shadow: 2px 0 0 rgb(241, 241, 241);
+}
+
+/* ========== REUSABLE COMPONENTS ========== */
 /* --- input styles */
 .winput {
   font-family: var(--win95-font);
@@ -19,8 +152,8 @@ button.primary {
 
   background: var(--window-light);
   box-shadow: var(--outer-bevel2);
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
 }
 
 button.primary:hover {

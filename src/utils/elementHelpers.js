@@ -1,0 +1,7 @@
+function createWindow() {
+  
+}
+
+function createEl() {
+  
+}

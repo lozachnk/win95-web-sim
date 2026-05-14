@@ -1,10 +1,20 @@
-const programs = [
+// TODO: Cleanup code - Separation of Concerns
+
+export const programs = [
   {
+    type: 'program',
     appId: 'a4c01905-2e8d-48c0-a518-2bb692538bea',
     appName: 'Calculator',
     windowClass: 'cal-window',
-    windowContent: `
-      <input type="text" name="" id="" class="winput" />
+    contentClass: 'cal'
+  }
+];
+
+function createCalculatorUI() {
+  const containerEl = document.createElement('div');
+
+  containerEl.innerHTML = `
+    <input type="text" name="" id="" class="winput" />
       <div class="top-row">
         <div class="memory-box"></div>
         <div class="actions">
@@ -43,7 +53,9 @@ const programs = [
           <button class="primary opr">+</button>
           <button class="primary opr">=</button>
         </div>
-      </div>`,
-  }
-];
+      </div>
+  `;
+
+  return containerEl;
+}
 

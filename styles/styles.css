@@ -3,7 +3,6 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 300px;
   width: 320px;
 }
 
@@ -30,7 +29,7 @@
 
 .memory-box,
 .bottom-row button {
-  height: 25px;
+  height: 27px;
   width: 40px;
 }
 
@@ -76,4 +75,51 @@
 .numpad {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+}
+
+.start-brand {
+  position: absolute;
+  bottom: 50px;
+  left: -42px;
+  rotate: -90deg;
+  height: 23px;
+  padding: 0;
+  margin: 0;
+}
+
+.pixel {
+  image-rendering: pixelated;
+}
+
+.chevron {
+  position: absolute;
+  right: 3px;
+  opacity: 0;
+}
+
+.start-entry:hover .chevron {
+  filter: invert(1);
+}
+
+.start-entry[data-type="folder"] .chevron {
+  opacity: 1;
+}
+
+.start-content > :not(:last-child):has(> *)::after{
+  content: '';
+  position: absolute;
+  left: 3px;
+  right: 3px;
+  bottom: -5px;
+  height: 2px;
+  background: #8e8e8e;
+  box-shadow: 0 2px 0 rgb(241, 241, 241);
+}
+
+.start-content > div {
+  position: relative;
+}
+
+.start-content > :not(:last-child):has(> *) {
+  margin-bottom: 10px;
 }

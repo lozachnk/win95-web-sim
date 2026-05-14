@@ -1,5 +1,6 @@
 export function attachGlobalEVT() {
   attachWindowEVT();
+  setTaskbarAndStartEVT();
 }
 
 function attachWindowEVT() {
@@ -44,5 +45,37 @@ function attachWindowEVT() {
   document.addEventListener('mousedown', onMouseDown);
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
+}
+
+function setTaskbarAndStartEVT() {
+  const taskbar = document.querySelector('.taskbar');
+  const startMenu = document.querySelector('.start-menu');
+  const startBtn = document.querySelector('.start-btn');
+
+  let startIsOpen = false;
+
+  if (taskbar) {
+    taskbar.addEventListener('click', (e) => {
+      const startBtn = e.target.closest('.start-btn');
+
+      if (startBtn) {
+        startIsOpen = !startIsOpen;
+        startMenu.classList.toggle('opened', startIsOpen);
+        startBtn.classList.toggle('active', startIsOpen);
+      }
+    })
+  }
+
+  // Make this event listener work with other menu elements
+  document.addEventListener('mousedown', (e) => {
+    const startMenuArea = e.target.closest('.start-menu');
+    const startBtnArea = e.target.closest('.start-btn');
+
+    if (!(startMenuArea || startBtnArea)) {
+      startIsOpen = false;
+      startMenu.classList.remove('opened');
+      startBtn.classList.remove('active');
+    }    
+  });
 }
 
