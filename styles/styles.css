@@ -57,8 +57,17 @@
   color: rgb(190, 17, 17);
 }
 
-.num {
-  color: rgb(74, 10, 138);
+.numpad button {
+  color: rgb(31, 24, 165);
+}
+
+.operations button,
+.action-btns button:last-child {
+  color: rgb(192, 24, 21);
+}
+
+.action-btns button {
+  color: rgb(41, 44, 92);
 }
 
 .memory-btns {
@@ -66,16 +75,36 @@
   flex-direction: column;
 }
 
-.memory-btns,
-.numpad {
+.memory-btns {
+  column-gap: 5px;
+  row-gap: 8px;
+}
+
+.numpad-btns {
+  display: flex;
+  column-gap: 5px;
+}
+
+.numpad,
+.operations,
+.action-btns {
+  display: grid;
   column-gap: 5px;
   row-gap: 8px;
 }
 
 .numpad {
+  grid-template-columns: repeat(3, 1fr);
+} 
+
+
+
+/* .numpad {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-}
+} */
+
+/* etc */
 
 .start-brand {
   position: absolute;
@@ -122,4 +151,15 @@
 
 .start-content > :not(:last-child):has(> *) {
   margin-bottom: 10px;
+}
+
+.cascading-menu {
+  position: absolute;
+  min-width: 150px;
+  padding: 3px;
+  background: var(--window-light);
+  box-shadow: var(--outer-bevel2);
+  border-width: 0 2px 2px 0;
+  border-style: solid;
+  border-color: var(--window-outer-bevel);
 }

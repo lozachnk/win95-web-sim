@@ -29,10 +29,14 @@
 html,
 body {
   position: relative;
-  font-family: var(--win95-font);
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+}
+
+body {
+  font-size: 16px;
+  font-family: var(--win95-font);
   background: rgb(0, 128, 129);
 }
 
@@ -46,7 +50,7 @@ input:focus {
   position: absolute;
   display: flex;
   flex-direction: column;
-  font-size: 14px;
+  font-size: 0.9em;
   background: var(--window-light);
   box-shadow: var(--outer-bevel2);
 

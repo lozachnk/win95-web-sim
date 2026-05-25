@@ -1,3 +1,6 @@
+import { createEl, createStartEntry } from "./elementHelpers.js";
+import { startEntries } from "../data/system.js";
+
 export function attachGlobalEVT() {
   attachWindowEVT();
   setTaskbarAndStartEVT();
@@ -77,5 +80,111 @@ function setTaskbarAndStartEVT() {
       startBtn.classList.remove('active');
     }    
   });
+
+  // Cascading menu logic
+  // Make a logic that if a [data-type="folder"] element anywhere in the start menu is hovered,
+  // that hover menu (parent element) whill also spawn a hover menu element
+
+  /*
+  let closeTimeout = null;
+
+  const getHoverMenu = () => document.querySelector('.cascading-menu');
+  const removeHoverMenu = () => {
+    const hoverMenu = getHoverMenu();
+    if (hoverMenu) hoverMenu.remove();
+  }
+
+  startMenu.addEventListener('mouseenter', (e) => {
+    let hoverMenu = getHoverMenu();
+
+    if (hoverMenu) {
+      if (hoverMenu.contains(e.target)) return;
+    }
+
+    const folderEntry = e.target.closest('[data-type="folder"]');
+    if (!folderEntry) {
+      closeTimeout = setTimeout(removeHoverMenu, 0);
+      return;
+    }
+
+    clearTimeout(closeTimeout);
+
+    if (!hoverMenu) {
+      hoverMenu = createEl('div', { classList: 'cascading-menu' });
+      startMenu.appendChild(hoverMenu);
+    }
+
+    const { id } = folderEntry.dataset;
+    hoverMenu.style.top = `${folderEntry.getBoundingClientRect().top - startMenu.getBoundingClientRect().top}px`;
+    hoverMenu.style.left = `${startMenu.getBoundingClientRect().width - 3}px`;
+    populateHoverMenu(id);
+  }, true)
+
+  startMenu.addEventListener('mouseleave', () => {
+    closeTimeout = setTimeout(removeHoverMenu, 0);
+  })
+  */
+
+  let parent = null;
+  let hoverMenu = null;
+
+  startMenu.addEventListener('mouseover', (e) => {
+    const folderItem = e.target.closest('.start-entry[data-type="folder"]');
+
+    if (folderItem && !folderItem.contains(e.relatedTarget)) {
+      parent = folderItem.parentElement;
+      
+      if (!parent.querySelector('.cascading-menu')) {
+        const hoverMenuEl = createEl('div', { classList: 'cascading-menu' });
+        parent.appendChild(hoverMenuEl);
+      }
+
+      hoverMenu = parent.querySelector('.cascading-menu');
+      if (folderItem && hoverMenu) {
+        const { id } = folderItem.dataset;
+        console.log('raw:', id, typeof id);
+
+        populateHoverMenu(hoverMenu, id.toString());
+        hoverMenu.style.top = `${folderItem.getBoundingClientRect().top - parent.getBoundingClientRect().top}px`;
+        hoverMenu.style.left = `${parent.getBoundingClientRect().width - 5}px`;
+      }
+    }
+
+    if (!folderItem && hoverMenu) {
+      if (!hoverMenu.contains(e.target) && !hoverMenu.contains(e.relatedTarget)) {
+        hoverMenu.remove();
+        hoverMenu = null;
+      }
+    }
+  });
+
+  startMenu.addEventListener('mouseleave', () => {
+    const rootSubmenu = startMenu.querySelector('.cascading-menu');
+    if (rootSubmenu) rootSubmenu.remove();
+  })
+  
+
+  function populateHoverMenu(hoverMenu, id) {
+    const selectedEntry = findItemById(startEntries, id);
+    console.log('passed:', id, typeof id, selectedEntry);
+    const folderContents = selectedEntry.menuList;
+
+    hoverMenu.innerHTML = '';
+    folderContents.forEach(content => {
+      hoverMenu.append(createStartEntry(content));
+    });
+  }
 }
 
+function findItemById(items, id) {
+  for (const item of items) {
+    if (item.id === id) return item;
+    if (item.menuList) {
+      const found = findItemById(item.menuList, id);
+      if (found) 
+        return found;
+    }
+  }
+
+  return null;
+}

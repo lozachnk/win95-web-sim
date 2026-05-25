@@ -1,14 +1,48 @@
-// TODO: Cleanup code - Separation of Concerns
+
+export const accessories = [
+  {
+    id: '201',
+    icon: 'styles/icons/apps/canvas.png',
+    title: 'Calculator',
+    type: 'program',
+    data: {
+      windowClass: 'cal-window',
+      contentClass: 'cal'
+    },
+  },
+];
+
+const games = [
+  {
+    id: '202',
+    icon: 'styles/icons/apps/canvas.png',
+    title: 'Minesweeper',
+    type: 'program',
+    data: {
+      windowClass: 'cal-window',
+      contentClass: 'cal'
+    },
+  },
+];
 
 export const programs = [
   {
-    type: 'program',
-    appId: 'a4c01905-2e8d-48c0-a518-2bb692538bea',
-    appName: 'Calculator',
-    windowClass: 'cal-window',
-    contentClass: 'cal'
+    id: '101',
+    icon: 'styles/icons/folders/generic-folder.png',
+    title: 'Accessories',
+    type: 'folder',
+    menuList: accessories,
+  },
+  {
+    id: '102',
+    icon: 'styles/icons/folders/generic-folder.png',
+    title: 'Games',
+    type: 'folder',
+    menuList: games
   }
 ];
+
+
 
 function createCalculatorUI() {
   const containerEl = document.createElement('div');

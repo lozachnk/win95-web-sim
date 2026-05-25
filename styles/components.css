@@ -3,12 +3,12 @@
 .start-menu {
   position: absolute;
   bottom: calc(var(--taskbar-height) - 4px);
-  width: 250px;
+  min-width: 200px;
   background: var(--window-light);
   box-shadow: var(--outer-bevel2);
   border-width: 0 2px 2px 0;
   border-style: solid;
-  border-color: black;
+  border-color: var(--window-outer-bevel);
   visibility: hidden;
 }
 
@@ -54,13 +54,13 @@
   padding: 4px;
 }
 
-.start-entry[data-type="folder"]::after {
-  content: '';
-}
-
 .start-entry:hover {
   background: var(--accent-blue);
   color: white;
+}
+
+.cascading-menu > .start-entry {
+  height: 20px;
 }
 
 .list-icon {
@@ -68,6 +68,11 @@
   width: 40px;
   object-fit: cover;
   overflow: hidden;
+}
+
+.cascading-menu .list-icon {
+  height: 20px;
+  width: 20px;
 }
 
 /* --- taskbar */
