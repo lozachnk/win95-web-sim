@@ -126,11 +126,15 @@
   opacity: 0;
 }
 
-.start-entry:hover .chevron {
+.menu-list {
+  cursor: pointer;
+}
+
+.start-content .menu-item:hover .chevron {
   filter: invert(1);
 }
 
-.start-entry[data-type="folder"] .chevron {
+.start-content .menu-item[data-type="folder"] .chevron {
   opacity: 1;
 }
 

@@ -1,7 +1,9 @@
 export function createStartEntry(entryData) {
+  let imgPathRoot = 'styles/icons/folders/start';
+
   const icon = createEl("img", {
     classList: "list-icon",
-    imgPath: entryData.icon,
+    imgPath: `${imgPathRoot}/start_${(entryData.title).toLowerCase()}.png`,
   });
 
   const title = createEl("p", { textContent: entryData.title });
@@ -17,6 +19,30 @@ export function createStartEntry(entryData) {
   });
 
   return startEntry;
+}
+
+export function createItem(data) {
+  const imgPath = `styles/icons/${data.type === 'folder' ? 'folders' : 'apps'}`;
+  const { title, type, id } = data;
+
+  const icon = createEl('img', {
+    classList: 'list-icon',
+    imgPath: `${imgPath}/${(title).toLowerCase()}.png`
+  });
+
+  const folderName = createEl('p', { textContent: title });
+  const chevron = createEl('img', { 
+    classList: 'chevron pixel', 
+    imgPath: 'styles/icons/system/start/arrow-asset.png', 
+  });
+
+  const item = createEl('div', {
+    classList: 'menu-item',
+    dataset: { type, id },
+    childNodes: [ icon, folderName, chevron ],
+  });
+
+  return item;
 }
 
 export function createEl(
