@@ -114,18 +114,15 @@ export const fileSystem = [
   }
 ];
 
+
 const startFolder = findItemByTitle(fileSystem, 'Start Menu');
 export const startChildren = startFolder.children;
 
 export function popStart() {
-  console.log(startFolder);
-  console.log(startChildren);
-
   const programList = document.querySelector(".main-list");
 
   startChildren.forEach(entry => programList.append(createItem(entry)));
 }
-
 
 
 // Use .map() to get all files/data needed to create a subcategory.

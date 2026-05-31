@@ -1,4 +1,303 @@
-/* ========== CALCULATOR APP ========== */
+/* ========== SYSTEM COMPONENTS ========== */
+
+/*  WINDOW BASE STYLES  */
+
+/* -- main window */
+.window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9em;
+  
+  padding: 4px;
+  padding-top: 28px;
+}
+
+.window-content {
+  height: 100%;
+  width: 100%;
+  padding: 15px 10px;
+}
+
+/* -- title bar */
+.title-bar {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 25px;
+  background: var(--title-bar-inactive);
+  overflow: hidden;
+  user-select: none;
+}
+
+.title-bar.active {
+  background: var(--title-bar-active);
+}
+
+.title-bar div {
+  display: flex;
+  align-items: center;
+}
+
+.title-bar p {
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+}
+
+.title-bar img {
+  height: 35px;
+  width: 25px;
+  margin: 2px;
+  object-fit: cover;
+}
+
+/* -- minimize, maximize, close buttons */
+.window-buttons {
+  margin-right: 3px;
+  gap: 1px;
+}
+
+.window-buttons button {
+  height: 18px;
+  width: 20px;
+}
+
+.window-buttons button img {
+  image-rendering: pixelated;
+  height: 15px;
+  width: 15px;
+}
+
+/* --- ribbon menu */
+.ribbon {
+  position: relative;
+  display: flex;
+  gap: 15px;
+  padding: 6px 5px;
+  user-select: none;
+}
+
+.ribbon span {
+  text-decoration: underline;
+}
+
+.ribbon::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: rgb(140, 140, 140);
+  box-shadow: 0 2px 0 rgb(231, 231, 231);
+}
+
+/* START MENU */
+
+/* --- Base start menu styles */
+.start-menu {
+  position: absolute;
+  bottom: calc(var(--taskbar-height) - 4px);
+  min-width: 200px;
+  visibility: hidden;
+}
+
+.start-menu {
+  display: grid;
+  grid-template-columns: 25px 1fr;
+  padding: 3px;
+}
+
+.start-menu.opened {
+  visibility: visible;
+  z-index: 1;
+}
+
+/* vertical title strip (with logo) */
+.title-strip {
+  color: white;
+  writing-mode: sideways-lr;
+  background: linear-gradient(
+    to bottom,
+    rgb(1, 0, 127),
+    rgb(1, 0, 127),
+    rgb(32, 32, 255)
+  );
+}
+
+.start-brand {
+  position: absolute;
+  bottom: 50px;
+  left: -42px;
+  rotate: -90deg;
+  height: 23px;
+  padding: 0;
+  margin: 0;
+}
+
+/* --- Start menu contents */
+.start-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.start-content > div {
+  position: relative;
+}
+
+.start-list 
+.menu-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.90em;
+  height: 35px;
+  padding: 4px;
+}
+
+.start-list .menu-item:hover {
+  background: var(--accent-blue);
+  color: white;
+}
+
+.list-icon {
+  height: 28px;
+  width: 28px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+
+/* hover menu specific */
+.start-list > .menu-item {
+  padding-left: 8px;
+}
+
+.cascading-menu > .menu-item {
+  height: 20px;
+}
+
+.cascading-menu .list-icon {
+  height: 20px;
+  width: 20px;
+}
+
+/* chevron visible only on folder entries */
+.start-content .menu-item[data-type="folder"] .chevron {
+  opacity: 1;
+}
+
+.start-content .menu-item:hover .chevron {
+  filter: invert(1);
+}
+
+/* --- Embossed line break element */
+.start-content > :not(:last-child):has(> *)::after{
+  content: '';
+  position: absolute;
+  left: 3px;
+  right: 3px;
+  bottom: -5px;
+  height: 2px;
+  background: #8e8e8e;
+  box-shadow: 0 2px 0 rgb(241, 241, 241);
+}
+
+.start-content > :not(:last-child):has(> *) {
+  margin-bottom: 10px;
+}
+
+/* --- taskbar */
+.taskbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: var(--taskbar-height);
+  background-color: var(--window-light);
+  border-top: 1px solid rgb(241, 241, 241);
+}
+
+.taskbar > div {
+  display: flex;
+}
+
+.start-btn {
+  font-size: 1em;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 0 8px;
+}
+
+.start-btn.active {
+  box-shadow: var(--inner-bevel2);
+  background: rgb(165, 170, 171);
+  border: none;
+}
+
+.start-btn.active:hover {
+  background: rgb(165, 170, 171);
+}
+
+.start-btn img {
+  height: 15px;
+  margin-right: 3px;
+}
+
+.sys-side {
+  padding: 8px;
+  align-items: center;
+  box-shadow: var(--inner-bevel2);
+}
+
+.start-side > * {
+  position: relative;
+  display: flex;
+}
+
+.start-side > :not(:last-child):has(> *)::after {
+  content: "";
+  position: absolute;
+  right: -8px;
+  height: 100%;
+  width: 2px;
+  background: #8e8e8e;
+  box-shadow: 2px 0 0 rgb(241, 241, 241);
+}
+
+/* ========== GENERAL ELEMENTS ========== */
+/* --- cascading menu */
+.cascading-menu {
+  position: absolute;
+  min-width: 150px;
+  padding: 3px;
+}
+
+.chevron {
+  position: absolute;
+  right: 3px;
+  opacity: 0;
+}
+
+/* --- effects */
+.pixel {
+  image-rendering: pixelated;
+}
+
+
+/* ========== APPLICATION STYLES ========== */
+/* --- Calculator */
 .cal-window {
   top: 50%;
   left: 50%;
@@ -96,74 +395,3 @@
 .numpad {
   grid-template-columns: repeat(3, 1fr);
 } 
-
-
-
-/* .numpad {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-} */
-
-/* etc */
-
-.start-brand {
-  position: absolute;
-  bottom: 50px;
-  left: -42px;
-  rotate: -90deg;
-  height: 23px;
-  padding: 0;
-  margin: 0;
-}
-
-.pixel {
-  image-rendering: pixelated;
-}
-
-.chevron {
-  position: absolute;
-  right: 3px;
-  opacity: 0;
-}
-
-.menu-list {
-  cursor: pointer;
-}
-
-.start-content .menu-item:hover .chevron {
-  filter: invert(1);
-}
-
-.start-content .menu-item[data-type="folder"] .chevron {
-  opacity: 1;
-}
-
-.start-content > :not(:last-child):has(> *)::after{
-  content: '';
-  position: absolute;
-  left: 3px;
-  right: 3px;
-  bottom: -5px;
-  height: 2px;
-  background: #8e8e8e;
-  box-shadow: 0 2px 0 rgb(241, 241, 241);
-}
-
-.start-content > div {
-  position: relative;
-}
-
-.start-content > :not(:last-child):has(> *) {
-  margin-bottom: 10px;
-}
-
-.cascading-menu {
-  position: absolute;
-  min-width: 150px;
-  padding: 3px;
-  background: var(--window-light);
-  box-shadow: var(--outer-bevel2);
-  border-width: 0 2px 2px 0;
-  border-style: solid;
-  border-color: var(--window-outer-bevel);
-}

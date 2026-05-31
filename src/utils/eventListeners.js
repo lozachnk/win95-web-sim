@@ -95,7 +95,7 @@ function setTaskbarAndStartEVT() {
         parent = folderItem.parentElement;
         
         if (!parent.querySelector('.cascading-menu')) {
-          const hoverMenuEl = createEl('div', { classList: 'cascading-menu' });
+          const hoverMenuEl = createEl('div', { classList: 'cascading-menu panel' });
           parent.appendChild(hoverMenuEl);
         }
 

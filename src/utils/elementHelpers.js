@@ -1,26 +1,3 @@
-export function createStartEntry(entryData) {
-  let imgPathRoot = 'styles/icons/folders/start';
-
-  const icon = createEl("img", {
-    classList: "list-icon",
-    imgPath: `${imgPathRoot}/start_${(entryData.title).toLowerCase()}.png`,
-  });
-
-  const title = createEl("p", { textContent: entryData.title });
-  const chevron = createEl("img", {
-    classList: "chevron pixel",
-    imgPath: "styles/icons/system/start/arrow-asset.png",
-  });
-
-  const startEntry = createEl("div", {
-    classList: "start-entry",
-    dataset: { type: entryData.type, id: entryData.id },
-    childNodes: [icon, title, chevron],
-  });
-
-  return startEntry;
-}
-
 export function createItem(data) {
   const imgPath = `styles/icons/${data.type === 'folder' ? 'folders' : 'apps'}`;
   const { title, type, id } = data;
