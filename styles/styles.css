@@ -1,7 +1,6 @@
 /* ========== SYSTEM COMPONENTS ========== */
 
 /*  WINDOW BASE STYLES  */
-
 /* -- main window */
 .window {
   position: absolute;
@@ -99,7 +98,6 @@
 }
 
 /* START MENU */
-
 /* --- Base start menu styles */
 .start-menu {
   position: absolute;
@@ -161,6 +159,7 @@
   font-size: 0.90em;
   height: 35px;
   padding: 4px;
+  cursor: pointer;
 }
 
 .start-list .menu-item:hover {
@@ -215,7 +214,7 @@
   margin-bottom: 10px;
 }
 
-/* --- taskbar */
+/* TASKBAR */
 .taskbar {
   display: flex;
   justify-content: space-between;

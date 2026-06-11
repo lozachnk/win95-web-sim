@@ -1,50 +1,12 @@
 import { createItem } from "../utils/elementHelpers.js";
 
 // TODO: Make file structure; all categories and subcategories (programs, documents, etc) must be contained here and only here in this file.
-const testChildren = [
-  {
-    id: '101',
-    icon: 'styles/icons/folders/generic-folder.png',
-    title: 'Accessories',
-    type: 'folder',
-    children: [
-      {
-        id: '201',
-        icon: 'styles/icons/apps/canvas.png',
-        title: 'Calculator',
-        type: 'program',
-        data: {
-          windowClass: 'cal-window',
-          contentClass: 'cal'
-        },
-      },
-    ],
-  },
-  {
-    id: '102',
-    icon: 'styles/icons/folders/generic-folder.png',
-    title: 'Games',
-    type: 'folder',
-    children: [
-      {
-        id: '202',
-        icon: 'styles/icons/apps/canvas.png',
-        title: 'Minesweeper',
-        type: 'program',
-        data: {
-          windowClass: 'cal-window',
-          contentClass: 'cal'
-        },
-      },
-    ]
-  }
-];
-
 export const fileSystem = [
   {
     id: 'b1f4b153-29a7-44c2-865c-61c2d917fb46',
     title: 'C:',
     type: 'drive',
+    style: 'category',
     children: [
       {
         id: '6a66dce1-d280-4a95-a4b5-4e5085bc8ba6',
@@ -60,30 +22,71 @@ export const fileSystem = [
                 id: '5917bb03-20aa-4dd2-a9a4-2848c90a4102',
                 title: 'Programs',
                 type: 'folder',
-                children: testChildren,
+                style: 'category',
+                children:  [
+                  {
+                    id: '101',
+                    title: 'Accessories',
+                    type: 'folder',
+                    children: [
+                      {
+                        id: '9e667939-f3be-49b3-9dba-67b7d8f1ea89',
+                        title: 'Calculator',
+                        type: 'file',
+                        ext: 'lnk',
+                        data: {
+                          windowClass: 'cal-window',
+                          contentClass: 'cal'
+                        },
+                      },
+                    ],
+                  },
+                  {
+                    id: '102',
+                    title: 'Games',
+                    type: 'folder',
+                    children: [
+                      {
+                        id: '202',
+                        icon: 'styles/icons/apps/canvas.png',
+                        title: 'Minesweeper',
+                        type: 'file',
+                        ext: 'lnk',
+                        data: {
+                          windowClass: 'cal-window',
+                          contentClass: 'cal'
+                        },
+                      },
+                    ]
+                  }
+                ],
               },
               {
                 id: 'dbf56451-b3fd-4f44-a50e-c97a832239bb',
                 title: 'Favorites',
                 type: 'folder',
+                style: 'category',
                 children: [],
               },
               {
                 id: 'b56a654c-187d-4450-ad9b-c4a45b4ab8a8',
                 title: 'Documents',
                 type: 'folder',
+                style: 'category',
                 children: [],
               },
               {
                 id: '44d46fee-0a9f-4e78-8cc9-251ba82ccc39',
                 title: 'Settings',
                 type: 'folder',
+                style: 'category',
                 children: [],
               },
               {
                 id: '2bd0628f-281f-4c62-b54b-3138fd2a797d',
                 title: 'Find',
                 type: 'folder',
+                style: 'category',
                 children: [],
               },
               {
@@ -107,7 +110,7 @@ export const fileSystem = [
             children: [
 
             ],
-          }
+          },
         ],
       },
     ],
