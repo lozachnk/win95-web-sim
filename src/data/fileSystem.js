@@ -48,7 +48,7 @@ export const fileSystem = [
                     children: [
                       {
                         id: '202',
-                        icon: 'styles/icons/apps/canvas.png',
+                        icon: 'assets/icons/apps/canvas.png',
                         title: 'Minesweeper',
                         type: 'file',
                         ext: 'lnk',

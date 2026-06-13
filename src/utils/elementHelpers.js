@@ -1,5 +1,5 @@
 export function createItem(data) {
-  const imgPath = `styles/icons/${data.type === "folder" ? "folders" : "apps"}`;
+  const imgPath = `assets/icons/${data.type === "folder" ? "folders" : "apps"}`;
   const { title, type, id, style } = data;
   let icon = createEl("img", {
     classList: "list-icon",
@@ -12,7 +12,7 @@ export function createItem(data) {
   const folderName = createEl("p", { textContent: title });
   const chevron = createEl("img", {
     classList: "chevron pixel",
-    imgPath: "styles/icons/system/start/arrow-asset.png",
+    imgPath: "assets/icons/system/start/arrow-asset.png",
   });
 
   const item = createEl("div", {
@@ -30,6 +30,7 @@ export function createEl(
     classList,
     textContent,
     innerHTML,
+    cssText,
     imgPath,
     dataset = {},
     childNodes = [],
@@ -39,6 +40,7 @@ export function createEl(
   if (classList) element.className = classList;
   if (textContent) element.textContent = textContent;
   if (innerHTML) element.innerHTML = innerHTML;
+  if (cssText) element.style.cssText = cssText;
   if (tag === "img") element.src = imgPath;
 
   for (const key in dataset) {
@@ -55,7 +57,7 @@ export function createEl(
 export function createWindow(program) {
   const { contentClass } = program.data;
 
-  const icon = `styles/icons/apps/${program.title.toLowerCase()}.png`;
+  const icon = `assets/icons/apps/${program.title.toLowerCase()}.png`;
   const titleBar = createEl("div", {
     classList: "title-bar",
     innerHTML: `
@@ -66,13 +68,13 @@ export function createWindow(program) {
 
       <div class="window-buttons">
         <button class="primary" id="minimize">
-          <img src="styles/icons/system/win-frame/minimize.png" alt="" />
+          <img src="assets/icons/system/win-frame/minimize.png" alt="" />
         </button>
         <button class="primary" id="maximize">
-          <img src="styles/icons/system/win-frame/maximize.png" alt="" />
+          <img src="assets/icons/system/win-frame/maximize.png" alt="" />
         </button>
         <button class="primary" id="closeWin">
-          <img src="styles/icons/system/win-frame/close.png" alt="" />
+          <img src="assets/icons/system/win-frame/close.png" alt="" />
         </button>
       </div>
     `,

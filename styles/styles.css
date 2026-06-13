@@ -394,3 +394,11 @@
 .numpad {
   grid-template-columns: repeat(3, 1fr);
 } 
+
+/* --- About project */
+.abt-window {
+  top: 50px;
+  left: 50px;
+  width: 400px;
+  height: 400px;
+}

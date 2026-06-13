@@ -7,12 +7,15 @@ export function attachGlobalEVT() {
   setTaskbarAndStartEVT();
 }
 
+// combine setting of dragged window and active window in one function
+
 const taskbar = document.querySelector(".taskbar");
 const startMenu = document.querySelector(".start-menu");
 const startBtn = document.querySelector(".start-btn");
 
-// Window dragging
 let window_zIndex = 0;
+
+// Window dragging
 function attachWindowEVT() {
   let draggedWindow = null;
   let offset = { x: 0, y: 0 };
@@ -29,8 +32,9 @@ function attachWindowEVT() {
       left: ${rect.left}px;
       top: ${rect.top}px;
       transform: none;
-      z-index: ${window_zIndex++};
+      z-index: ${window_zIndex = window_zIndex + 2};
     `;
+    startMenu.style.zIndex = `${window_zIndex + 2}`;
     taskbar.style.zIndex = `${window_zIndex + 1}`;
 
     const titleBars = document.querySelectorAll(".title-bar");
@@ -50,6 +54,7 @@ function attachWindowEVT() {
 
     draggedWindow = win;
     document.body.style.userSelect = "none";
+    console.log(window_zIndex);
   }
 
   function onMouseMove(e) {
@@ -151,11 +156,12 @@ function setTaskbarAndStartEVT() {
       const win = createWindow(regEntry);
       const winContent = createEl("div", {
         classList: `window-content ${contentClass}`,
-        innerHTML: contentHTML,
+        innerHTML: contentHTML
       });
 
       win.appendChild(winContent);
       initCalcApp(win);
+      win.style.zIndex = window_zIndex;
       document.body.appendChild(win);
 
       closeStartMenu(e);
