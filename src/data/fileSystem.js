@@ -127,10 +127,8 @@ export function popStart() {
   startChildren.forEach(entry => programList.append(createItem(entry)));
 }
 
-
 // Use .map() to get all files/data needed to create a subcategory.
 // Add function for shortcuts.
-
 
 
 function findItemByTitle(items, title) {

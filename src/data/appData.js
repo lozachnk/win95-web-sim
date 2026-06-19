@@ -2,6 +2,7 @@ export const programRegistry = [
   {
     id: '9e667939-f3be-49b3-9dba-67b7d8f1ea89',
     title: 'Calculator',
+    alias: 'calc.exe',
     data: {
       contentClass: 'cal',
       contentHTML: `
@@ -51,7 +52,9 @@ export const programRegistry = [
             </div>
           </div>
         </div>
-      `
+      `,
+      eventListener: initCalcApp,
+      singleInstance: true,
     }
   },
   {
@@ -60,6 +63,8 @@ export const programRegistry = [
     data: {
       contentClass: 'abt',
       contentHTML: ``,
+      eventListener: ()=>{},
+      singleInstance: true,
     },
   }
 ];
@@ -118,7 +123,6 @@ export function initCalcApp(win) {
   });
 
   // TODO: Keydown event listener
-
   function compute(a, b, operation) {
     a = Number(a);
     b = Number(b);
@@ -134,6 +138,3 @@ export function initCalcApp(win) {
     return sum;
   }
 }
-
-// EVENT LISTENERS
-// --------- calculator

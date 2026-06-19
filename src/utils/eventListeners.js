@@ -1,6 +1,6 @@
 import { createEl, createItem, createWindow } from "./elementHelpers.js";
 import { startChildren } from "../data/fileSystem.js";
-import { programRegistry, initCalcApp } from "../data/appData.js";
+import { programRegistry } from "../data/appData.js";
 
 export function attachGlobalEVT() {
   attachWindowEVT();
@@ -8,7 +8,6 @@ export function attachGlobalEVT() {
 }
 
 // combine setting of dragged window and active window in one function
-
 const taskbar = document.querySelector(".taskbar");
 const startMenu = document.querySelector(".start-menu");
 const startBtn = document.querySelector(".start-btn");
@@ -32,20 +31,8 @@ function attachWindowEVT() {
       left: ${rect.left}px;
       top: ${rect.top}px;
       transform: none;
-      z-index: ${window_zIndex = window_zIndex + 2};
     `;
-    startMenu.style.zIndex = `${window_zIndex + 2}`;
-    taskbar.style.zIndex = `${window_zIndex + 1}`;
-
-    const titleBars = document.querySelectorAll(".title-bar");
-    titleBars.forEach((bar) => {
-      bar.style.cssText = `
-        background: var(--title-bar-inactive);
-      `;
-    });
-    titleBar.style.cssText = `
-      background: var(--title-bar-active);
-    `;
+    windowSetActive(win);
 
     offset = {
       x: e.clientX - rect.left,
@@ -54,7 +41,6 @@ function attachWindowEVT() {
 
     draggedWindow = win;
     document.body.style.userSelect = "none";
-    console.log(window_zIndex);
   }
 
   function onMouseMove(e) {
@@ -73,7 +59,12 @@ function attachWindowEVT() {
 
   document.addEventListener("mousedown", onMouseDown);
   document.addEventListener("mousemove", onMouseMove);
-  document.addEventListener("mouseup", onMouseUp);
+  document.addEventListener("mouseup", onMouseUp); 
+
+  document.addEventListener('mousedown', (e) => {
+    const win = e.target.closest('.window');
+    if (win) windowSetActive(win);
+  });
 }
 
 let startIsOpen = false;
@@ -90,7 +81,6 @@ function setTaskbarAndStartEVT() {
   });
 
   document.addEventListener("mousedown", closeStartMenu);
-
   document.addEventListener("click", (e) => {
     const closeBtn = e.target.closest("#closeWin");
 
@@ -151,7 +141,18 @@ function setTaskbarAndStartEVT() {
     if (item) {
       const { id } = item.dataset;
       const regEntry = programRegistry.find((program) => program.id === id);
-      const { contentClass, contentHTML } = regEntry.data;
+      const { contentClass, contentHTML, eventListener, singleInstance } = regEntry.data;
+      const existingWindow = document.querySelector(`.window.panel.${contentClass}-window`);
+
+      if (singleInstance && existingWindow) {
+        windowSetActive(existingWindow);
+
+        startIsOpen = false;
+        startMenu.classList.remove("opened");
+        startBtn.classList.remove("active");
+
+        return;
+      };
 
       const win = createWindow(regEntry);
       const winContent = createEl("div", {
@@ -160,11 +161,14 @@ function setTaskbarAndStartEVT() {
       });
 
       win.appendChild(winContent);
-      initCalcApp(win);
+      eventListener(win);
       win.style.zIndex = window_zIndex;
       document.body.appendChild(win);
+      windowSetActive(win);
 
-      closeStartMenu(e);
+      startIsOpen = false;
+      startMenu.classList.remove("opened");
+      startBtn.classList.remove("active");
     }
   });
 }
@@ -200,4 +204,24 @@ function closeStartMenu(e) {
     startMenu.classList.remove("opened");
     startBtn.classList.remove("active");
   }
+}
+
+function windowSetActive(win) {
+  const windowTitleBar = win.querySelector('.title-bar');
+  if (!windowTitleBar) return;
+
+  win.style.zIndex = `${window_zIndex += 2}`;
+  startMenu.style.zIndex = `${window_zIndex + 2}`;
+  taskbar.style.zIndex = `${window_zIndex + 1}`;
+
+  const titleBars = document.querySelectorAll(".title-bar");
+  titleBars.forEach((bar) => {
+    bar.style.cssText = `
+      background: var(--title-bar-inactive);
+    `;
+  });
+
+  windowTitleBar.style.cssText = `
+    background: var(--title-bar-active);
+  `;
 }
